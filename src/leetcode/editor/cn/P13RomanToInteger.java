@@ -63,6 +63,7 @@ public class P13RomanToInteger{
         System.out.println(solution.romanToInt(s));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
+
 class Solution {
     public int romanToInt(String s) {
 //I             1
@@ -91,23 +92,24 @@ class Solution {
     }
 
     private int getRealeSum(char c) {
-        switch (c - 'A') {
-            case 8:
+        switch (c) {
+            case 'I':
                 return 1;
-            case 21:
+            case 'V':
                 return 5;
-            case 23:
+            case 'X':
                 return 10;
-            case 11:
+            case 'L':
                 return 50;
-            case 2:
+            case 'C':
                 return 100;
-            case 3:
+            case 'D':
                 return 500;
-            case 12:
+            case 'M':
                 return 1000;
+            default:
+                return 0;
         }
-        return 0;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -117,6 +119,6 @@ class Solution {
  *     判断字符与上一个字符的大小, 若大于, 则加上新字符 减去旧字符*2
  *     解答成功:
  * 			执行耗时:4 ms,击败了99.98% 的Java用户
- * 			内存消耗:40 MB,击败了5.56% 的Java用户
+ * 			内存消耗:39.7 MB,击败了88.32% 的Java用户
  */
 }

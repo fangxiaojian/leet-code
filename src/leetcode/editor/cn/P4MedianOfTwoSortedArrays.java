@@ -35,6 +35,7 @@ public class P4MedianOfTwoSortedArrays{
         System.out.println(solution.findMedianSortedArrays(nums1, nums2));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
+
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         // 假设数组已排序
