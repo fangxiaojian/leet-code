@@ -64,9 +64,31 @@ public class P12IntegerToRoman{
 
 class Solution {
     public String intToRoman(int num) {
-        return "";
+        if (num <= 0) {
+            return "";
+        }
+        int[] value = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] roman = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        char[] result = new char[15];
+        int index = 0;
+        for (int i = 0; i < value.length; i++) {
+            while (num >= value[i]) {
+                num -= value[i];
+                result[index++] = roman[i].charAt(0);
+                if (roman[i].toCharArray().length == 2) {
+                    result[index++] = roman[i].charAt(1);
+                }
+            }
+        }
+        return new String(result, 0 ,index);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 将各个情况存储到数组中, 遍历数组, 循环减去特定值(1000, 900, 500...), 用数组存放罗马数
+ *     解答成功:
+ * 			执行耗时:4 ms,击败了99.99% 的Java用户
+ * 			内存消耗:40 MB,击败了18.43% 的Java用户
+ */
 }

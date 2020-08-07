@@ -49,13 +49,27 @@ class Solution {
                 min = prices[i];
                 border = i;
                 temp = i;
+                tempMaxPorfit = prices[i + 1] - min;
                 break;
             }
         }
-        if (min == 0) {
+        if (tempMaxPorfit == 0) {
             return tempMaxPorfit;
         }
+        // 定位0
+        for (int i = border + 1; i < prices.length; i++) {
+            if (prices[i] == 0) {
+                min = prices[i];
+                temp = i;
+                for (int j = temp + 1; j < prices.length; j++) {
+                    max = Math.max(max, prices[j]);
+                }
+                tempMaxPorfit = Math.max(max, tempMaxPorfit);
+            }
+        }
+
         // 定位最小值
+        min = prices[border];
         for (int i = border + 1; i < prices.length; i++) {
             if (min > prices[i] && prices[i] != 0) {
                 min = prices[i];
@@ -66,7 +80,7 @@ class Solution {
         for (int i = temp + 1; i < prices.length; i++) {
             max = Math.max(max, prices[i]);
         }
-        tempMaxPorfit = Math.max((max - min), 0);
+        tempMaxPorfit = Math.max(max - min, tempMaxPorfit);
 
         // 定位最大值
         max = prices[border + 1];
@@ -87,5 +101,16 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 暴力, 分多钟情况进行判断  ----> 不可取
+ *      a. 查询边界, 即 prices[i]<prices[i+1]  i左边的不需要考虑  只考虑右边
+ *      b. 查询prices[i]==0 的情况, 查询右边最大值, 计算收益
+ *      c. 查询最小值, 之后查询右边最大值, 计算收益
+ *      d. 查询最大值 ,之后查询左边最小值, 计算收益
+ *      e. 返回最大收益
+ *      解答成功:
+ * 			执行耗时:123 ms,击败了18.78% 的Java用户
+ * 			内存消耗:40 MB,击败了13.63% 的Java用户
+ */
 }

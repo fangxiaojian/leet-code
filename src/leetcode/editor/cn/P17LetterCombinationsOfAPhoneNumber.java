@@ -25,24 +25,55 @@ public class P17LetterCombinationsOfAPhoneNumber{
     public static void main(String[] args) {      
         Solution solution = new P17LetterCombinationsOfAPhoneNumber().new Solution();       
         // TO TEST
-        solution.letterCombinations("23");
+        List<String> list = solution.letterCombinations("23");
+        for (String s : list) {
+            System.out.println(s);
+        }
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
 class Solution {
+    char[] temp;
+    List<String> list = new ArrayList<>();
+    char[][] str = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}, {'j', 'k', 'l'},
+                {'m', 'n', 'o'}, {'p', 'q', 'r', 's'}, {'t', 'u', 'v'}, {'w', 'x', 'y', 'z'}};
+    final char MAKE_UP = '2';
     public List<String> letterCombinations(String digits) {
-        List<String> list = new ArrayList<>();
         if (digits == null || ("").equals(digits) || digits.length() == 0) {
             return list;
         }
-        char[][] str = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}, {'j', 'k', 'l'},
-                {'m', 'n', 'o'}, {'p', 'q', 'r', 's'}, {'t', 'u', 'v'}, {'w', 'x', 'y', 'z'}};
-        for (int i = 0; i < digits.length(); i++) {
-
-        }
+        temp = new char[digits.length()];
+        backtracking(0, digits);
         return list;
+    }
+
+    private void backtracking(int index, String digits) {
+        if (index == digits.length() - 1) {
+            for (int i = 0; i < str[digits.charAt(index) - MAKE_UP].length; i++) {
+                temp[index] = str[digits.charAt(index) - MAKE_UP][i];
+                list.add(new String(temp));
+            }
+        } else {
+            for (int i = 0; i < str[digits.charAt(index) - MAKE_UP].length; i++) {
+                temp[index] = str[digits.charAt(index) - MAKE_UP][i];
+                backtracking(index + 1, digits);
+            }
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+/**
+ * 思路:
+ * 1. 回溯算法
+ *     先准备电话号码对应的字符
+ *     创建char数组用于存放字母组合
+ *     用递归实现回溯算法
+ *
+ *     解答成功:
+ * 			执行耗时:0 ms,击败了100.00% 的Java用户
+ * 			内存消耗:38.7 MB,击败了53.38% 的Java用户
+ */
+
 
 }
+
