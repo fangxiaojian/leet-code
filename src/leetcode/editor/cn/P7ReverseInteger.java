@@ -34,11 +34,9 @@ public class P7ReverseInteger{
         System.out.println(solution.reverse(x));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
+
 class Solution {
     public int reverse(int x) {
-        if (x < Integer.MIN_VALUE || x > Integer.MAX_VALUE) {
-            return 0;
-        }
         int result = 0;
         boolean isFlag = false;
         if (x < 0) {
