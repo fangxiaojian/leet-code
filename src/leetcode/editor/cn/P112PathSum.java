@@ -53,16 +53,22 @@ class Solution {
     private boolean findPathSum(TreeNode root, int temp) {
         if (root != null) {
             temp += root.val;
-            if (temp < SUM) {
-                return findPathSum(root.left, temp) || findPathSum(root.right, temp);
+            if (root.left == null && root.right == null) {
+                return temp == SUM;
             }
-            if (temp == SUM && root.left == null && root.right == null) {
-                return true;
-            }
+            return findPathSum(root.left, temp) || findPathSum(root.right, temp);
         }
         return false;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 递归: 用临时值记录到当前节点的路径和
+ *     若当前节点为叶子节点, 判断是否是需要的路径和
+ *     否则递归操作
+ *     解答成功:
+ * 			执行耗时:0 ms,击败了100.00% 的Java用户
+ * 			内存消耗:40 MB,击败了7.02% 的Java用户
+ */
 }

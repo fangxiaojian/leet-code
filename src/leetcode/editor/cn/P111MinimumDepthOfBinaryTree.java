@@ -26,7 +26,9 @@ import leetcode.editor.cn.util.TreeNode;
 public class P111MinimumDepthOfBinaryTree{    
     public static void main(String[] args) {      
         Solution solution = new P111MinimumDepthOfBinaryTree().new Solution();       
-        // TO TEST	 
+        // TO TEST
+        Integer[] value = {1, 2};
+        System.out.println(solution.minDepth(new TreeNode(value)));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -51,19 +53,30 @@ class Solution {
     }
 
     private void findBalancedHeight(TreeNode root, int temp) {
-        if (minHeight != 0 && temp > minHeight) {
-            return;
-        }
-        if (root == null) {
+        temp++;
+        if (root.left == null && root.right == null) {
             if (minHeight == 0 || temp < minHeight) {
                 minHeight = temp;
             }
+        } else {
+            if (root.left != null) {
+                findBalancedHeight(root.left, temp);
+            }
+            if (root.right != null) {
+                findBalancedHeight(root.right, temp);
+            }
         }
-        temp++;
-        findBalancedHeight(root.left, temp);
-        findBalancedHeight(root.right, temp);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 递归,
+ *     先判断该节点是不是叶子节点
+ *     是: 计算是否是最小深度
+ *     否: 判断左右节点是否为空, 不为空递归调用
+ *     解答成功:
+ * 			执行耗时:0 ms,击败了100.00% 的Java用户
+ * 			内存消耗:39.7 MB,击败了74.78% 的Java用户
+ */
 }

@@ -53,7 +53,7 @@ class Solution {
             p2 = p2.next;
         }
         if (p2 == null && p1==head) {
-            return null;
+            return head.next;
         } else {
             p1.next = p1.next.next;
         }
@@ -61,5 +61,15 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 双指针:                       1 -> 2 -> 3 -> 4 -> 5       删除倒数第2个数
+ *    现将p2指针向前移动2位数,                  p2
+ *    p1指针指在头节点1,             p1        p2
+ *    遍历链表至末尾,此时                       p1        p2
+ *    p1 的下一个节点就是要删除的节点
+ *    解答成功:
+ * 			执行耗时:1 ms,击败了22.35% 的Java用户
+ * 			内存消耗:38 MB,击败了38.60% 的Java用户
+ */
 }

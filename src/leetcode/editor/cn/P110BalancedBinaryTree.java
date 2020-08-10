@@ -46,7 +46,11 @@ import leetcode.editor.cn.util.TreeNode;
 public class P110BalancedBinaryTree{    
     public static void main(String[] args) {      
         Solution solution = new P110BalancedBinaryTree().new Solution();       
-        // TO TEST	 
+        // TO TEST
+
+        Integer[] values = {1,2,2,3,3,3,3,4,4,4,4,4,4,null,null,5,5};
+        TreeNode root = new TreeNode(values);
+        System.out.println(solution.isBalanced(root));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -59,30 +63,32 @@ public class P110BalancedBinaryTree{
  * }
  */
 class Solution {
-    int maxHeight = 0;
-    int minHeight = 0;
 
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
             return true;
         }
-        int temp = 0;
-        findBalancedHeight(root, temp);
-        return maxHeight - minHeight <= 1;
+        return findBalancedHeight(root);
     }
 
-    private void findBalancedHeight(TreeNode root, int temp) {
-        if (root == null) {
-            if (minHeight == 0 || temp < minHeight) {
-                minHeight = temp;
+    private boolean findBalancedHeight(TreeNode root) {
+        if (root != null) {
+            if (root.left == null && root.right == null) {
+                return true;
+            }else if (root.left != null && root.right != null) {
+                return findBalancedHeight(root.left) && findBalancedHeight(root.right);
+            } else if (root.left == null) {
+                if (root.right.left == null && root.right.right == null) {
+                    return true;
+                }
+            } else {
+                if (root.left.left == null && root.left.right == null) {
+                    return true;
+                }
             }
-            if (maxHeight == 0 || temp > maxHeight) {
-                maxHeight = temp;
-            }
+            return false;
         }
-        temp++;
-        findBalancedHeight(root.left, temp);
-        findBalancedHeight(root.right, temp);
+        return true;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
