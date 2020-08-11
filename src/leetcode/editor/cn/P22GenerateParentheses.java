@@ -34,30 +34,42 @@ public class P22GenerateParentheses{
 class Solution {
     private List<String> list = new ArrayList<>();
     char[] parenthesis;
-    int count = 0;
-    int left = 0;
     public List<String> generateParenthesis(int n) {
         if (n <= 0) {
             return list;
         }
         parenthesis = new char[n * 2];
-        parenthesis(n);
+        parenthesis(n, 0, 0);
         return list;
     }
 
-    private void parenthesis(int n) {
-        for (int i = 0; i < n; i++) {
+    private void parenthesis(int n, int m, int count) {
+        while (m < n && count < parenthesis.length) {
             parenthesis[count++] = '(';
-            parenthesis(n - i - 1);
-            count = parenthesis.length / 2 - i - 1;
-            parenthesis[count++] = ')';
+            parenthesis(n, ++m, count);
+            // 回退一格
+            m--;
+            count--;
+            // 置为 ')'
+            if (count < m * 2) {
+                parenthesis[count++] = ')';
+            } else { // 关闭递归
+                return;
+            }
         }
-        for (int i = count; i< parenthesis.length; i++) {
-            parenthesis[i] = ')';
+        // 补全 括号
+        while (count < parenthesis.length) {
+            parenthesis[count++] = ')';
         }
         list.add(new String(parenthesis));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 递归: 特别需要注意的是, 递归在哪里需要停止
+ *    解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		存消耗:39.7 MB,击败了81.08% 的Java用户
+ */
 }
