@@ -30,7 +30,10 @@ import java.util.Arrays;
 public class P16ThreeSumClosest{    
     public static void main(String[] args) {      
         Solution solution = new P16ThreeSumClosest().new Solution();       
-        // TO TEST	 
+        // TO TEST
+        int[] nums = {-1,0,1,2,-1,-4};
+        int taget = 0;
+        solution.threeSumClosest(nums, taget);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -53,15 +56,18 @@ class Solution {
         int temp = 0;
         while (p3 < nums.length) {
             temp = nums[p1] + nums[p2] + nums[p3];
-            if (Math.abs(temp - target) > Math.abs(target - minDifferenceValue)) {
+            if (temp == target) {
+                return temp;
+            }
+            if (Math.abs(temp - target) > Math.abs(target - minDifferenceValue) && minDifferenceValue != Integer.MAX_VALUE) {
                 return minDifferenceValue;
             }
             minDifferenceValue = temp;
             // 移动指针
             if (p3 + 1 < nums.length) {
-                if (nums[p3 + 1] - nums[p3] <= nums[p2 + 1] - nums[p2] && nums[p3 + 1] - nums[p3] <= nums[p1 + 1] - nums[p1]) {
+                if (nums[p3 + 1] - nums[p3] < nums[p2 + 1] - nums[p2] && nums[p3 + 1] - nums[p3] < nums[p1 + 1] - nums[p1]) {
                     p3++;
-                } else if (nums[p2 + 1] - nums[p2] <= nums[p3 + 1] - nums[p3] && nums[p2 + 1] - nums[p2] <= nums[p1 + 1] - nums[p1]) {
+                } else if (nums[p2 + 1] - nums[p2] < nums[p3 + 1] - nums[p3] && nums[p2 + 1] - nums[p2] < nums[p1 + 1] - nums[p1]) {
                     if (p2 + 1 == p3) {
                         p3++;
                     } else {
