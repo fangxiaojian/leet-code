@@ -42,6 +42,8 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.util.TreeNode;
 
+import java.util.Stack;
+
 //Java：平衡二叉树
 public class P110BalancedBinaryTree{    
     public static void main(String[] args) {      
@@ -68,29 +70,37 @@ class Solution {
         if (root == null) {
             return true;
         }
-        return findBalancedHeight(root);
-    }
-
-    private boolean findBalancedHeight(TreeNode root) {
-        if (root != null) {
-            if (root.left == null && root.right == null) {
-                return true;
-            }else if (root.left != null && root.right != null) {
-                return findBalancedHeight(root.left) && findBalancedHeight(root.right);
-            } else if (root.left == null) {
-                if (root.right.left == null && root.right.right == null) {
-                    return true;
-                }
-            } else {
-                if (root.left.left == null && root.left.right == null) {
-                    return true;
-                }
-            }
+        int leftHeight = getTreeHeight(root.left);
+        int rightHeight = getTreeHeight(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight-rightHeight)>1) {
             return false;
         }
+
         return true;
     }
+
+    private int getTreeHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = getTreeHeight(root.left);
+        int rightHeight = getTreeHeight(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight-rightHeight)>1) {
+            return -1;
+        }
+
+        return leftHeight >= rightHeight ? leftHeight+1 : rightHeight+1;
+
+    }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 递归, 若各个二叉树的左右节点高度差不超过1,则该二叉树为平衡二叉树
+ *     利用递归从最底层开始计算二叉树的高度,判断是否为平衡二叉树,不是返回-1,是返回左右子树的最大高度+1.
+ *     解答成功:
+ * 			执行耗时:1 ms,击败了99.76% 的Java用户
+ * 			内存消耗:39.7 MB,击败了85.83% 的Java用户
+ */
 }

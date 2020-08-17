@@ -33,7 +33,7 @@ public class P16ThreeSumClosest{
         // TO TEST
         int[] nums = {-1,0,1,2,-1,-4};
         int taget = 0;
-        solution.threeSumClosest(nums, taget);
+        System.out.println(solution.threeSumClosest(nums, taget));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
