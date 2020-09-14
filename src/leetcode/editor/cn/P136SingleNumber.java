@@ -29,7 +29,27 @@ public class P136SingleNumber{
 
 class Solution {
     public int singleNumber(int[] nums) {
-        return 0;
+
+        int temp = nums[0];
+        int count = 0;
+        int p = 0;
+        for (int i = 0; i < nums.length; ) {
+            count++;
+            if (temp % nums.length == i) {
+                i = count;
+            }else {
+                i = temp % nums.length;
+                if (temp == nums[i]) {
+                    nums[i] = -1;
+                    i = count;
+                } else {
+                    p = nums[i];
+                    nums[i] = temp;
+                    temp = p;
+                }
+            }
+        }
+        return p;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
