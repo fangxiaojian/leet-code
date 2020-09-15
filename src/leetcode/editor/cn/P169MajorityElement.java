@@ -23,21 +23,21 @@ package leetcode.editor.cn;
 public class P169MajorityElement{    
     public static void main(String[] args) {      
         Solution solution = new P169MajorityElement().new Solution();       
-        // TO TEST  
+        // TO TEST
+        int[] numbers = {3,2,3};
+        System.out.println(solution.majorityElement(numbers));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
 class Solution {
     public int majorityElement(int[] nums) {
-        int[][] index = new int[nums.length/2][2];
+        int[][] index = new int[nums.length/2+1][2];
         int target = 0;
         for (int num : nums) {
             for (int j = 0; j < index.length; j++) {
-                if (num == 0) {
-                    target = 0;
-                    break;
-                } else if (index[j][0] == 0 || index[j][0] == num) {
+                if ((index[j][0] == 0 && index[j][1]==0) || index[j][0] == num) {
                     target = j;
+                    index[j][0] = num;
                     break;
                 }
             }
@@ -50,5 +50,12 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ *     创建一个元数组一半的数组用于记录个数,==>造成内存消耗大
+ *     每查询一个数字都要遍历一遍数组查询  ===>造成消耗时间长
+ *     解答成功:
+ * 			执行耗时:8 ms,击败了33.40% 的Java用户
+ * 			内存消耗:45 MB,击败了24.81% 的Java用户
+ */
 }
