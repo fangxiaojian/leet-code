@@ -28,8 +28,8 @@ public class P268MissingNumber{
     public static void main(String[] args) {      
         Solution solution = new P268MissingNumber().new Solution();       
         // TO TEST
-        int[] nums = {9,6,4,2,3,5,7,0,1};
-        solution.missingNumber(nums);
+        int[] nums = {7,6,4,2,3,5,8,0,1};
+        System.out.println(solution.missingNumber(nums));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -42,10 +42,35 @@ class Solution {
                 return 0;
             }
         }
+        int index = 0; // 记录哪个数缺失
+        int temp;
+        boolean flagFinal = false; // 判断是否是最后一个数缺失
+        int p=0;
+        while (index < nums.length && p < nums.length) {
+            temp = nums[p];
+            if (temp == nums.length) {
+                flagFinal = true;
+                index = p;
+                p++;
+            } else if (p == temp) {
+                p++;
+            }else {
+                nums[p] = nums[temp];
+                nums[temp] = temp;
+            }
+        }
 
-        return 0;
+        return flagFinal? index : nums.length;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ *     1. 每个数都有自己的位置(除了最后一位数),遍历数组,将数字u归位
+ *        当最后一个数存在时,index记录最后一位数的位置,及数组缺失的数字所在
+ *        当最后一位数不存在时,返回数组长度
+ *        解答成功:
+ * 				执行耗时:1 ms,击败了53.37% 的Java用户
+ * 				内存消耗:39.3 MB,击败了69.79% 的Java用户
+ */
 }
