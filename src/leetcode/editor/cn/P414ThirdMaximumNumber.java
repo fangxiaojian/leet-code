@@ -45,9 +45,52 @@ public class P414ThirdMaximumNumber{
 
 class Solution {
     public int thirdMax(int[] nums) {
-        return 0;
+        if (nums.length <= 1) {
+            return nums[0];
+        }
+        int max1 = nums[0];
+        int max2 = 0, max3 = 0;
+        boolean flag1 = false, flag2 = false;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > max1) {
+                if (!flag1) {// 第二大的数为空
+                    flag1 = true;
+                } else {
+                    if (!flag2) { // 第三大的数为空
+                        flag2 = true;
+                    }
+                    max3 = max2;
+                }
+                max2 = max1;
+                max1 = nums[i];
+            } else if (nums[i] < max1) { // 数组的元素 < 最大的数
+                if (!flag1) { // 第二大的数为空
+                    flag1 = true;
+                    max2 = nums[i];
+                } else {
+                    if (nums[i] > max2) {
+                        if (!flag2) {
+                            flag2 = true;
+                        }
+                        max3 = max2;
+                        max2 = nums[i];
+                    } else if (nums[i] < max2 && (!flag2 || max3 < nums[i])) { // 判断当前元素是否为第三大数
+                        flag2 = true;
+                        max3 = nums[i];
+                    }
+                }
+            }
+        }
+        return flag2 ? max3 : max1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路：
+ *     1. 不推荐：直接将遇到的情况判断出来
+ *         用3个容器存放最大到第三大三个数，若存放到第三个容器，返回第三大的数，否则返回最大的数。
+ *         解答成功:
+ * 			  执行耗时:1 ms,击败了96.62% 的Java用户
+ * 			  内存消耗:38.6 MB,击败了64.72% 的Java用户
+ */
 }
