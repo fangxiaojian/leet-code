@@ -18,6 +18,7 @@
 
 package leetcode.editor.cn;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Java：找到所有数组中消失的数字
@@ -30,10 +31,27 @@ public class P448FindAllNumbersDisappearedInAnArray{
 
 class Solution {
     public List<Integer> findDisappearedNumbers(int[] nums) {
-
-        return null;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[Math.abs(nums[i])-1] > 0) {
+                nums[Math.abs(nums[i])-1] *= -1;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                list.add(i + 1);
+            }
+        }
+        return list;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ *     1. 将数组元素对应的位置置为负数,代表该位置有值.
+ *         再遍历一次数组,找到不为负数的下标,就是数组缺失的数字了
+ *         解答成功:
+ * 				执行耗时:8 ms,击败了42.37% 的Java用户
+ * 				内存消耗:47.9 MB,击败了36.59% 的Java用户
+ */
 }
