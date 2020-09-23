@@ -49,6 +49,9 @@
 
 
 package leetcode.editor.cn;
+
+import java.util.Stack;
+
 //Java：删除最外层的括号
 public class P1021RemoveOutermostParentheses{    
     public static void main(String[] args) {      
@@ -59,9 +62,38 @@ public class P1021RemoveOutermostParentheses{
 
 class Solution {
     public String removeOuterParentheses(String S) {
-        return null;
+        if (S == null || ("").equals(S)) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+        boolean flag = false;
+        for (int i = 0; i < S.length(); i++) {
+            if (!flag) {
+                if (S.charAt(i) == '(') {
+                    flag = true;
+                }
+            } else {
+                if (S.charAt(i) == '(') {
+                    stack.push(S.charAt(i));
+                    result.append(S.charAt(i));
+                } else if (S.charAt(i) == ')') {
+                    if (stack.empty()) {
+                        flag = false;
+                    } else {
+                        stack.pop();
+                        result.append(S.charAt(i));
+                    }
+                }
+            }
+        }
+        return result.toString();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 解答成功:
+ * 		执行耗时:12 ms,击败了20.35% 的Java用户
+ * 		内存消耗:39 MB,击败了39.92% 的Java用户
+ */
 }
