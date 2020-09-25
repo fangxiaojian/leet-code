@@ -53,9 +53,26 @@ public class P876MiddleOfTheLinkedList{
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        return null;
+        if (head == null) {
+            return head;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast.next != null) {
+            return slow.next;
+        }
+        return slow;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 1. 快慢指针, 快指针前进两步, 慢指针前进一步, 当快指针到末尾时, 慢指针指向中点
+ *    解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		内存消耗:36 MB,击败了78.78% 的Java用户
+ */
 }

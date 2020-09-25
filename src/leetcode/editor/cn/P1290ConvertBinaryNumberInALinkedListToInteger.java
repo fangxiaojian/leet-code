@@ -71,9 +71,19 @@ public class P1290ConvertBinaryNumberInALinkedListToInteger{
  */
 class Solution {
     public int getDecimalValue(ListNode head) {
-        return 0;
+        int count = 0;
+        while (head != null) {
+            count *= 2;
+            count += head.val;
+            head = head.next;
+        }
+        return count;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		内存消耗:36.4 MB,击败了66.69% 的Java用户
+ */
 }

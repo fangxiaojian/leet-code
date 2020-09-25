@@ -37,8 +37,28 @@ public class P234PalindromeLinkedList{
  * }
  */
 class Solution {
+    ListNode headP;
+
     public boolean isPalindrome(ListNode head) {
-        return false;
+        headP = head;
+        return recursiveJudgment(head);
+    }
+
+    private boolean recursiveJudgment(ListNode node) {
+        if (node.next != null) {
+            if (recursiveJudgment(node.next)) {
+                if (headP.val == node.val) {
+                    headP = headP.next;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return headP.val == node.val;
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
