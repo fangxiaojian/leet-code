@@ -51,14 +51,14 @@ public class P532KDiffPairsInAnArray{
 
 class Solution {
     public int findPairs(int[] nums, int k) {
-        if (nums.length <= 1) {
+        if (nums == null || nums.length <= 1) {
             return 0;
         }
         Arrays.sort(nums);
         int count = 0;
-        for (int i = 0, j=1; i < nums.length - 1 && j < nums.length; i++, j++) {
+        for (int i = 0, j=1; i < nums.length - 1 && j < nums.length; i++) {
             if (nums[i] == nums[i + 1]) {
-                for (; i < nums.length - 1; i++) {
+                for (i++; i < nums.length - 1; i++) {
                     if (nums[i] != nums[i + 1]) {
                         break;
                     }
@@ -66,19 +66,18 @@ class Solution {
                 if (k == 0) {
                     i--;
                 }
-                if (j <= i) {
-                    j = i+1;
-                }
+            }
+            if (j <= i) {
+                j = i+1;
             }
             if (nums[i] + k == nums[j]) {
                 count++;
             } else if (nums[i] + k > nums[j]) {
-                for (j += 1; j < nums.length; j++) {
+                for (j++ ; j < nums.length; j++) {
                     if (nums[i] + k == nums[j]) {
                         count++;
                         break;
-                    } else if (nums[i] + k < nums[j]){
-                        j--;
+                    } else if (nums[i] + k < nums[j]) {
                         break;
                     }
                 }
