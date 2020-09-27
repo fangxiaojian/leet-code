@@ -45,20 +45,23 @@ import java.util.Arrays;
 public class P532KDiffPairsInAnArray{    
     public static void main(String[] args) {      
         Solution solution = new P532KDiffPairsInAnArray().new Solution();       
-        // TO TEST  
+        // TO TEST
+        int[] nums = {6,7,3,6,4,6,3,5,6,9};
+        int k = 4;
+        solution.findPairs(nums, k);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
 class Solution {
     public int findPairs(int[] nums, int k) {
-        if (nums == null || nums.length <= 1) {
+        if (nums.length <= 1) {
             return 0;
         }
         Arrays.sort(nums);
         int count = 0;
         for (int i = 0, j=1; i < nums.length - 1 && j < nums.length; i++) {
             if (nums[i] == nums[i + 1]) {
-                for (i++; i < nums.length - 1; i++) {
+                for (; i < nums.length - 1; i++) {
                     if (nums[i] != nums[i + 1]) {
                         break;
                     }
@@ -67,17 +70,19 @@ class Solution {
                     i--;
                 }
             }
-            if (j <= i) {
-                j = i+1;
+            if (j <= i && i + 1 < nums.length) {
+                j = i + 1;
             }
             if (nums[i] + k == nums[j]) {
                 count++;
+                j++;
             } else if (nums[i] + k > nums[j]) {
-                for (j++ ; j < nums.length; j++) {
+                for (j += 1; j < nums.length; j++) {
                     if (nums[i] + k == nums[j]) {
                         count++;
+                        j++;
                         break;
-                    } else if (nums[i] + k < nums[j]) {
+                    } else if (nums[i] + k < nums[j]){
                         break;
                     }
                 }
@@ -87,5 +92,9 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ *解答成功:
+ * 	执行耗时:8 ms,击败了85.29% 的Java用户
+ * 	内存消耗:39.2 MB,击败了61.12% 的Java用户
+ */
 }
