@@ -1,20 +1,25 @@
-//请判断一个链表是否为回文链表。 
+//编写一个函数，检查输入的链表是否是回文的。 
 //
-// 示例 1: 
+// 
 //
-// 输入: 1->2
-//输出: false 
+// 示例 1： 
 //
-// 示例 2: 
+// 输入： 1->2
+//输出： false 
+// 
 //
-// 输入: 1->2->2->1
-//输出: true
+// 示例 2： 
+//
+// 输入： 1->2->2->1
+//输出： true 
+// 
+//
 // 
 //
 // 进阶： 
 //你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？ 
-// Related Topics 链表 双指针 
-// 👍 646 👎 0
+// Related Topics 链表 
+// 👍 30 👎 0
 
 
 package leetcode.editor.cn;
@@ -22,12 +27,10 @@ package leetcode.editor.cn;
 import leetcode.editor.cn.util.ListNode;
 
 //Java：回文链表
-public class P234PalindromeLinkedList{    
+class P面试题0206PalindromeLinkedListLcci{
     public static void main(String[] args) {      
-        Solution solution = new P234PalindromeLinkedList().new Solution();       
-        // TO TEST
-        ListNode listNode = new ListNode(new int[]{1, 2, 2, 1});
-        solution.isPalindrome(listNode);
+        Solution solution = new P面试题0206PalindromeLinkedListLcci().new Solution();
+        // TO TEST  
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -39,7 +42,6 @@ public class P234PalindromeLinkedList{
  * }
  */
 class Solution {
-
     public boolean isPalindrome(ListNode head) {
         if (head == null) {
             return true;
@@ -72,13 +74,11 @@ class Solution {
         }
         return true;
     }
-
-
 }
 //leetcode submit region end(Prohibit modification and deletion)
 /**
  * 解答成功:
- * 		执行耗时:1 ms,击败了99.84% 的Java用户
- * 		内存消耗:41.4 MB,击败了65.37% 的Java用户
+ * 		执行耗时:1 ms,击败了99.97% 的Java用户
+ * 		内存消耗:41.3 MB,击败了80.11% 的Java用户
  */
 }

@@ -35,40 +35,40 @@ import java.util.Stack;
 
 //Java：用两个栈实现队列
 //public class P剑指 Offer 09YongLiangGeZhanShiXianDuiLieLcof{
-public class P剑指Offer09YongLiangGeZhanShiXianDuiLieLcof{
+class P剑指Offer09YongLiangGeZhanShiXianDuiLieLcof{
     public static void main(String[] args) {
         CQueue solution = new P剑指Offer09YongLiangGeZhanShiXianDuiLieLcof().new CQueue();
-        // TO TEST  
+        // TO TEST
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
-class CQueue {
+    class CQueue {
 
-    private Stack<Integer> stack1;
-    private Stack<Integer> stack2;
+        private Stack<Integer> stack1;
+        private Stack<Integer> stack2;
 
-    public CQueue() {
-        stack1 = new Stack<>();
-        stack2 = new Stack<>();
-    }
-    
-    public void appendTail(int value) {
-        stack1.push(value);
-    }
-    
-    public int deleteHead() {
-        if (stack2.empty()) {
-            while (!stack1.empty()) {
-                stack2.push(stack1.pop());
+        public CQueue() {
+            stack1 = new Stack<>();
+            stack2 = new Stack<>();
+        }
+
+        public void appendTail(int value) {
+            stack1.push(value);
+        }
+
+        public int deleteHead() {
+            if (stack2.empty()) {
+                while (!stack1.empty()) {
+                    stack2.push(stack1.pop());
+                }
+            }
+            if (!stack2.empty()) {
+                return stack2.pop();
+            }else {
+                return -1;
             }
         }
-        if (!stack2.empty()) {
-            return stack2.pop();
-        }else {
-            return -1;
-        }
     }
-}
 
 /**
  * Your CQueue object will be instantiated and called as such:

@@ -35,63 +35,63 @@ import java.util.Stack;
 
 //Java：包含min函数的栈
 //public class P剑指 Offer 30BaoHanMinhanShuDeZhanLcof{
-public class P剑指Offer30BaoHanMinhanShuDeZhanLcof{
+class P剑指Offer30BaoHanMinhanShuDeZhanLcof{
     public static void main(String[] args) {
         MinStack solution = new P剑指Offer30BaoHanMinhanShuDeZhanLcof().new MinStack();
         // TO TEST
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-class MinStack {
+    class MinStack {
 
-    private Stack<Integer> stack;
-    private Stack<Integer> minStack;
-    /** initialize your data structure here. */
-    public MinStack() {
-        stack = new Stack<>();
-        minStack = new Stack<>();
-    }
-    
-    public void push(int x) {
-        if (minStack.empty() || minStack.peek() >= x) {
-            minStack.push(x);
+        private Stack<Integer> stack;
+        private Stack<Integer> minStack;
+        /** initialize your data structure here. */
+        public MinStack() {
+            stack = new Stack<>();
+            minStack = new Stack<>();
         }
-        stack.push(x);
-    }
-    
-    public void pop() {
-        if (!stack.empty()) {
-            if (!minStack.empty() && stack.peek().equals(minStack.peek())) {
-                minStack.pop();
+
+        public void push(int x) {
+            if (minStack.empty() || minStack.peek() >= x) {
+                minStack.push(x);
             }
-            stack.pop();
+            stack.push(x);
         }
-    }
-    
-    public int top() {
-        if (!stack.empty()) {
-            return stack.peek();
-        }
-        return -1;
-    }
-    
-    public int min() {
-        if (!minStack.empty()) {
-            return minStack.peek();
-        }else {
-            Stack<Integer> temp = new Stack<>();
-            while (!stack.empty()) {
-                temp.push(stack.pop());
-            }
-            while (!temp.empty()) {
-                if (minStack.empty() || minStack.peek() > temp.peek()) {
-                    minStack.push(temp.peek());
+
+        public void pop() {
+            if (!stack.empty()) {
+                if (!minStack.empty() && stack.peek().equals(minStack.peek())) {
+                    minStack.pop();
                 }
-                stack.push(temp.pop());
+                stack.pop();
             }
-            return minStack.peek();
+        }
+
+        public int top() {
+            if (!stack.empty()) {
+                return stack.peek();
+            }
+            return -1;
+        }
+
+        public int min() {
+            if (!minStack.empty()) {
+                return minStack.peek();
+            }else {
+                Stack<Integer> temp = new Stack<>();
+                while (!stack.empty()) {
+                    temp.push(stack.pop());
+                }
+                while (!temp.empty()) {
+                    if (minStack.empty() || minStack.peek() > temp.peek()) {
+                        minStack.push(temp.peek());
+                    }
+                    stack.push(temp.pop());
+                }
+                return minStack.peek();
+            }
         }
     }
-}
 
 /**
  * Your MinStack object will be instantiated and called as such:
