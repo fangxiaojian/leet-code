@@ -25,6 +25,7 @@ public class P319BulbSwitcher{
         // TO TEST  
     }
     //leetcode submit region begin(Prohibit modification and deletion)
+
 class Solution {
     public int bulbSwitch(int n) {
         return 0;
