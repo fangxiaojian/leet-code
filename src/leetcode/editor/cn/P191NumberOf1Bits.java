@@ -52,9 +52,20 @@ public class P191NumberOf1Bits{
 public class Solution {
     // you need to treat n as an unsigned value
     public int hammingWeight(int n) {
-        return 0;
+        int count = 0;
+        while (n != 0) {
+            if ((n & 1) == 1) {
+                count++;
+            }
+            n = n >>> 1;
+        }
+        return count;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 解答成功:
+ * 		执行耗时:1 ms,击败了99.05% 的Java用户
+ * 		内存消耗:35.7 MB,击败了78.31% 的Java用户
+ */
 }
