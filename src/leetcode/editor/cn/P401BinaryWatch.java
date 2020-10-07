@@ -32,6 +32,7 @@
 
 package leetcode.editor.cn;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Java：二进制手表
@@ -43,8 +44,43 @@ public class P401BinaryWatch{
     //leetcode submit region begin(Prohibit modification and deletion)
 
 class Solution {
+
+    private List<String> watch = new ArrayList<>();
+
     public List<String> readBinaryWatch(int num) {
-        return null;
+        if (num == 0) {
+            watch.add("0:00");
+            return watch;
+        } else if (num > 8) {
+            return watch;
+        } else if (num == 8) {
+            watch.add("11:59");
+            return watch;
+        }
+        int i = num > 5 ? num - 5 : 0;
+        for (; i <= num; i++) {
+            hourWatch(i, num-i);
+        }
+
+        return watch;
+    }
+
+    private void hourWatch(int h, int min) {
+        if (h == 0) {
+            minuteWatch("0:", min);
+        } else {
+            int[] hours = {1, 2, 4, 8};
+            int hour = 0;
+            for (int i = 0; i< hours.length; i++) {
+                for (int j = 0; j < h; j++) {
+                    hour += hours[j];
+                }
+            }
+        }
+    }
+
+    private void minuteWatch(String hour, int n) {
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
