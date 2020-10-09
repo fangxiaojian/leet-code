@@ -50,9 +50,31 @@ public class P1217MinimumCostToMoveChipsToTheSamePosition{
 
 class Solution {
     public int minCostToMoveChips(int[] position) {
-        return 0;
+        if (position == null || position.length == 0) {
+            return 0;
+        }
+        int countOdd = 0;
+        int countTwin = 0;
+        for (int i : position) {
+            if (i % 2 == 0) {
+                countTwin++;
+            } else {
+                countOdd++;
+            }
+        }
+        return Math.min(countOdd, countTwin);
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路: 移动 2 格 不用代价
+ *      即单数的拼凑在一起不用代价
+ *        双数的拼凑在一起也不用代价
+ *        最后移动到相邻位置也不用代价
+ *        所以代价只是把小的部分移动一格的代价
+ * 解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		内存消耗:36.3 MB,击败了62.91% 的Java用户
+ */
 }

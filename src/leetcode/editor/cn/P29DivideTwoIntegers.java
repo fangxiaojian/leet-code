@@ -25,7 +25,7 @@
 // 
 // 被除数和除数均为 32 位有符号整数。 
 // 除数不为 0。 
-// 假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231, 231 − 1]。本题中，如果除法结果溢出，则返回 231 − 1。 
+// 假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−2^31, 2^31 − 1]。本题中，如果除法结果溢出，则返回 2^31 − 1。
 // 
 // Related Topics 数学 二分查找 
 // 👍 395 👎 0
@@ -43,24 +43,8 @@ public class P29DivideTwoIntegers{
 
 class Solution {
     public int divide(int dividend, int divisor) {
-        if (divisor == 0) {
-            return 0;
-        }
-        int business = 0;
-        int flag = 1;
-        if (!(dividend >= 0 && divisor >= 0)) {
-            flag = -1;
-            if (dividend < 0) {
-                dividend *= flag;
-            } else {
-                divisor *= flag;
-            }
-        }
-        while (dividend >= divisor) {
-            dividend -= divisor;
-            business++;
-        }
-        return flag * business;
+
+        return 0;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
