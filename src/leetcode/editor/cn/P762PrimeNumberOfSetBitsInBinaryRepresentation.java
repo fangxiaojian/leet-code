@@ -39,6 +39,10 @@
 
 
 package leetcode.editor.cn;
+
+import java.util.HashSet;
+import java.util.Set;
+
 //Java：二进制表示中质数个计算置位
 public class P762PrimeNumberOfSetBitsInBinaryRepresentation{    
     public static void main(String[] args) {      
@@ -48,11 +52,41 @@ public class P762PrimeNumberOfSetBitsInBinaryRepresentation{
     //leetcode submit region begin(Prohibit modification and deletion)
 
 class Solution {
+
+    private Set<Integer> primeNumber = new HashSet<>();
     public int countPrimeSetBits(int L, int R) {
-        // 32 内的质数 2,3,5,7,11,13,17,19,23,29,31
-        return 0;
+        int count = 0;
+        for (int i = L; i <= R; i++) {
+            if (isPrimeNumber(Integer.bitCount(i))) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private boolean isPrimeNumber(int n) {
+        if (primeNumber.isEmpty()) {
+            primeNumber.add(2);
+            primeNumber.add(3);
+            primeNumber.add(5);
+            primeNumber.add(7);
+            primeNumber.add(11);
+            primeNumber.add(13);
+            primeNumber.add(17);
+            primeNumber.add(19);
+            primeNumber.add(23);
+            primeNumber.add(29);
+            primeNumber.add(31);
+        }
+        return primeNumber.contains(n);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路: 暴力破解
+ * 解答成功:
+ * 		执行耗时:13 ms,击败了33.02% 的Java用户
+ * 		内存消耗:35.7 MB,击败了52.26% 的Java用户
+ */
 }

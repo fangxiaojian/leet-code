@@ -48,41 +48,42 @@ class Solution {
     private List<String> watch = new ArrayList<>();
 
     public List<String> readBinaryWatch(int num) {
-        if (num == 0) {
-            watch.add("0:00");
-            return watch;
-        } else if (num > 8) {
-            return watch;
-        } else if (num == 8) {
-            watch.add("11:59");
-            return watch;
-        }
-        int i = num > 5 ? num - 5 : 0;
-        for (; i <= num; i++) {
-            hourWatch(i, num-i);
-        }
-
-        return watch;
-    }
-
-    private void hourWatch(int h, int min) {
-        if (h == 0) {
-            minuteWatch("0:", min);
-        } else {
-            int[] hours = {1, 2, 4, 8};
-            int hour = 0;
-            for (int i = 0; i< hours.length; i++) {
-                for (int j = 0; j < h; j++) {
-                    hour += hours[j];
+        List<String> times = new ArrayList<>();
+        for (int h = 0; h < 12; h++) {
+            for (int m = 0; m < 60; m++) {
+                if (Integer.bitCount(h) + Integer.bitCount(m) == num) {
+                    times.add(parseWatch(h, m));
                 }
             }
         }
+        return times;
     }
 
-    private void minuteWatch(String hour, int n) {
-
+    private String parseWatch(int hour, int minute) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(hour).append(":");
+        if(minute < 10) {
+            sb.append(0);
+        }
+        sb.append(minute);
+        return sb.toString();
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * Integer.bitCount(h) 计算 二进制 1 的个数
+ * public static int bitCount(int i) {
+ *         // HD, Figure 5-2
+ *         i = i - ((i >>> 1) & 0x55555555);
+ *         i = (i & 0x33333333) + ((i >>> 2) & 0x33333333);
+ *         i = (i + (i >>> 4)) & 0x0f0f0f0f;
+ *         i = i + (i >>> 8);
+ *         i = i + (i >>> 16);
+ *         return i & 0x3f;
+ * }
+ * 解答成功:
+ * 		执行耗时:1 ms,击败了97.92% 的Java用户
+ * 		内存消耗:37.1 MB,击败了95.06% 的Java用户
+ */
 }
