@@ -16,6 +16,7 @@
 
 
 package leetcode.editor.cn;
+
 //Java：翻转数位
 class P面试题0503ReverseBitsLcci{
     public static void main(String[] args) {      
@@ -26,9 +27,22 @@ class P面试题0503ReverseBitsLcci{
 
 class Solution {
     public int reverseBits(int num) {
-        return 0;
+        String[] split = Integer.toBinaryString(num).split("0");
+        int max = 0;
+        int temp = 0;
+        for (String s : split) {
+            temp += s.length();
+            max = Math.max(max, Math.min(temp + 1, 32));
+            temp = s.length();
+        }
+
+        return max == 0 ? 1 : max;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 解答成功:
+ * 		执行耗时:1 ms,击败了27.00% 的Java用户
+ * 		内存消耗:35.6 MB,击败了61.24% 的Java用户
+ */
 }

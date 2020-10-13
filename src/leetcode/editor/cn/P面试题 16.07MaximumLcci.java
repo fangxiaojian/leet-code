@@ -18,9 +18,16 @@ class P面试题1607MaximumLcci{
 
 class Solution {
     public int maximum(int a, int b) {
-        return 0;
+        int k = (a ^ b) >>> 31;
+        return k * (a * ((a >> 31) + 1) + b * ((b >> 31) + 1)) +
+                ((k-1)>>>31) * (((a - b) >>> 31 ^ 1) * a + ((((a - b) >>> 31) + 1) & 1 ^ 1) * b);
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		内存消耗:35.4 MB,击败了81.41% 的Java用户
+ */
 }
