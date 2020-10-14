@@ -32,7 +32,9 @@ package leetcode.editor.cn;
 import leetcode.editor.cn.util.TreeNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //Java：二叉搜索树中的众数
 public class P501FindModeInBinarySearchTree{    
@@ -54,48 +56,49 @@ public class P501FindModeInBinarySearchTree{
  */
 class Solution {
 
+    private Map<Integer, Integer> map = new HashMap<>();
     private List<Integer> list = new ArrayList<>();
     int countMax = 0;
     public int[] findMode(TreeNode root) {
         if (root == null) {
             return new int[0];
         }
-        findModeSame(root, 0);
-        int[] a = new int[list.size()];
-        int i = 0;
-        for (Integer integer : list) {
-            a[i++] = integer;
+        inOrderTraversalTree(root);
+        int[] result = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i);
         }
-        return a;
+        return result;
     }
 
-    private int findModeSame(TreeNode root, int i) {
-        int temp = i + 1;
-        if (root.left != null && root.left.val == root.val) {
-            temp = findModeSame(root.left, temp);
+    private void inOrderTraversalTree(TreeNode root) {
+        if (root.left != null) {
+            inOrderTraversalTree(root.left);
         }
-        if (root.right != null && root.right.val == root.val) {
-            temp = findModeSame(root.right, temp);
+
+        int temp = 1;
+        if (map.containsKey(root.val)) {
+            temp += map.get(root.val);
         }
-        if (temp > i + 1) {
-            return temp;
-        }
-        if (temp == countMax) {
-            list.add(root.val);
-        } else if (temp > countMax) {
+        if (temp > countMax) {
             list.clear();
             countMax = temp;
             list.add(root.val);
+        }else if (temp == countMax){
+            list.add(root.val);
         }
-        if (root.left != null) {
-            findModeSame(root.left, 0);
-        }
+        map.put(root.val, temp);
+
         if (root.right != null) {
-            findModeSame(root.right, 0);
+            inOrderTraversalTree(root.right);
         }
-        return temp;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 1. 使用额外空间
+ * 解答成功:
+ * 		执行耗时:2 ms,击败了53.92% 的Java用户
+ * 		内存消耗:40.4 MB,击败了25.29% 的Java用户
+ */
 }

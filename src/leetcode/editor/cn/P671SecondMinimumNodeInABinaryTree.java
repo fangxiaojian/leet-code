@@ -34,6 +34,9 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.util.TreeNode;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 //Java：二叉树中第二小的节点
 public class P671SecondMinimumNodeInABinaryTree{    
     public static void main(String[] args) {      
@@ -52,9 +55,46 @@ public class P671SecondMinimumNodeInABinaryTree{
  */
 class Solution {
     public int findSecondMinimumValue(TreeNode root) {
-        return 0;
+        int firstMin = 0;
+        int secondMin = -1;
+        if (root == null) {
+            return secondMin;
+        }
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        firstMin = root.val;
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.left != null) {
+                if (node.left.val == firstMin) {
+                    queue.add(node.left);
+                }else {
+                    if (secondMin == -1) {
+                        secondMin = node.left.val;
+                    } else {
+                        secondMin = Math.min(secondMin, node.left.val);
+                    }
+                }
+            }
+            if (node.right != null) {
+                if (node.right.val == firstMin) {
+                    queue.add(node.right);
+                }else {
+                    if (secondMin == -1) {
+                        secondMin = node.right.val;
+                    } else {
+                        secondMin = Math.min(secondMin, node.right.val);
+                    }
+                }
+            }
+        }
+        return secondMin;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		内存消耗:35.5 MB,击败了100.00% 的Java用户
+ */
 }
