@@ -61,11 +61,17 @@ package leetcode.editor.cn;
 
 import leetcode.editor.cn.util.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //Java：叶子相似的树
 public class P872LeafSimilarTrees{    
     public static void main(String[] args) {      
         Solution solution = new P872LeafSimilarTrees().new Solution();       
-        // TO TEST  
+        // TO TEST
+        TreeNode root1 = new TreeNode(new Integer[]{3, 5, 1, 6, 2, 9, 8, null, null, 7, 4});
+        TreeNode root2 = new TreeNode(new Integer[]{3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8});
+        solution.leafSimilar(root1, root2);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -84,10 +90,37 @@ public class P872LeafSimilarTrees{
  * }
  */
 class Solution {
+    private List<Integer> list1 = new ArrayList<>();
+    private List<Integer> list2 = new ArrayList<>();
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
-        return false;
+        preorderTraversal(root1, list1);
+        preorderTraversal(root2, list2);
+        if (list1.size() != list2.size()) {
+            return false;
+        }
+        for (int i = 0; i < list1.size(); i++) {
+            if (list1.get(i) != list2.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void preorderTraversal(TreeNode root, List<Integer> list) {
+        if (root != null) {
+            if (root.left == null && root.right == null) {
+                list.add(root.val);
+            } else {
+                preorderTraversal(root.left, list);
+                preorderTraversal(root.right, list);
+            }
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		内存消耗:36 MB,击败了99.92% 的Java用户
+ */
 }
