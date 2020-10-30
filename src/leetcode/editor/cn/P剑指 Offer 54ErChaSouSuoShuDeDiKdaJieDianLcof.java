@@ -54,24 +54,38 @@ class P剑指Offer54ErChaSouSuoShuDeDiKdaJieDianLcof{
  * }
  */
 class Solution {
+    private int[] rootVal;
+    private int index;
     public int kthLargest(TreeNode root, int k) {
+        rootVal = new int[k];
+        index = k-1;
+        kthLargestToArrays(root);
+        return rootVal[0];
+    }
+
+    public void kthLargestToArrays(TreeNode root) {
         if (root == null) {
-            return 0;
+            return;
         }
         if (root.right != null) {
-            kthLargest(root.right, k);
+            kthLargestToArrays(root.right);
         }
-        if (k == 0) {
-            return root.val;
-        } else {
-            k--;
+        if (index >= 0) {
+            rootVal[index--] = root.val;
+        }else {
+            return;
         }
         if (root.left != null) {
-            kthLargest(root.right, k);
+            kthLargestToArrays(root.left);
         }
-        return 0;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 右中左的遍历方式,得到的是降序排序的
+ *
+ * 解答成功:
+ * 		执行耗时:0 ms,击败了100.00% 的Java用户
+ * 		内存消耗:38.1 MB,击败了99.70% 的Java用户
+ */
 }
