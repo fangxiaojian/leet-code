@@ -31,9 +31,29 @@ public class P242ValidAnagram{
 
 class Solution {
     public boolean isAnagram(String s, String t) {
-        return false;
+        if (s.length() != t.length()) {
+            return false;
+        }
+        int[] hash = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            hash[s.charAt(i)-'a']++;
+        }
+        for (int i = 0; i < t.length(); i++) {
+            if (hash[t.charAt(i)-'a'] > 0) {
+                hash[t.charAt(i)-'a']--;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路:
+ * 1. 将字母-'a'后可以得到26个数字(0->25),存入数组中,字符串s遍历存入数组,字符串t遍历从数组中移除
+ * 解答成功:
+ * 		执行耗时:4 ms,击败了61.55% 的Java用户
+ * 		内存消耗:38.7 MB,击败了53.65% 的Java用户
+ */
 }
