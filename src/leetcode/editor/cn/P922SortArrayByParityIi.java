@@ -33,15 +33,43 @@ package leetcode.editor.cn;
 public class P922SortArrayByParityIi{    
     public static void main(String[] args) {      
         Solution solution = new P922SortArrayByParityIi().new Solution();       
-        // TO TEST  
+        // TO TEST
+        int[] A = {2, 3, 3, 1, 4, 4, 0, 0, 1, 3};
+        solution.sortArrayByParityII(A);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
 class Solution {
     public int[] sortArrayByParityII(int[] A) {
-        return null;
+        if (A == null || A.length <= 0) {
+            return A;
+        }
+        int first = 0;
+        int last = A.length - 1;
+        while (first <= A.length-1 && last >= 0) {
+            if (first % 2 == 0 && A[first] % 2 == 0) {
+                first+=2;
+                continue;
+            }
+            if (last % 2 != 0 && A[last] % 2 != 0) {
+                last-=2;
+                continue;
+            }
+            int temp = A[first];
+            A[first] = A[last];
+            A[last] = temp;
+            first+=2;
+            last-=2;
+        }
+        return A;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 双指针
+ * 一个遍历奇数,一个遍历偶数
+ * 解答成功:
+ * 		执行耗时:3 ms,击败了78.94% 的Java用户
+ * 		内存消耗:39.7 MB,击败了68.66% 的Java用户
+ */
 }
