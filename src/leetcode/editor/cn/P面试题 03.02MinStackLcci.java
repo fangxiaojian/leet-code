@@ -10,11 +10,10 @@ package leetcode.editor.cn;
 import java.util.Stack;
 
 //Java：栈的最小值
-//public class P面试题 03.02MinStackLcci{
-public class P面试题0302MinStackLcci{
+class P面试题0302MinStackLcci{
     public static void main(String[] args) {
         MinStack solution = new P面试题0302MinStackLcci().new MinStack();
-        // TO TEST
+        // TO TEST  
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -27,14 +26,14 @@ class MinStack {
         stack = new Stack<>();
         minStack = new Stack<>();
     }
-    
+
     public void push(int x) {
         if (minStack.empty() || minStack.peek() >= x) {
             minStack.push(x);
         }
         stack.push(x);
     }
-    
+
     public void pop() {
         if (!stack.empty()) {
             if (!minStack.empty() && stack.peek().equals(minStack.peek())) {
@@ -43,14 +42,14 @@ class MinStack {
             stack.pop();
         }
     }
-    
+
     public int top() {
         if (!stack.empty()) {
             return stack.peek();
         }
         return -1;
     }
-    
+
     public int getMin() {
         if (!minStack.empty()) {
             return minStack.peek();

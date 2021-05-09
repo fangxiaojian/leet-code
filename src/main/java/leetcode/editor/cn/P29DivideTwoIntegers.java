@@ -43,24 +43,8 @@ public class P29DivideTwoIntegers{
 
 class Solution {
     public int divide(int dividend, int divisor) {
-        if (divisor == 0) {
-            return 0;
-        }
-        int business = 0;
-        int flag = 1;
-        if (!(dividend >= 0 && divisor >= 0)) {
-            flag = -1;
-            if (dividend < 0) {
-                dividend *= flag;
-            } else {
-                divisor *= flag;
-            }
-        }
-        while (dividend >= divisor) {
-            dividend -= divisor;
-            business++;
-        }
-        return flag * business;
+
+        return 0;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

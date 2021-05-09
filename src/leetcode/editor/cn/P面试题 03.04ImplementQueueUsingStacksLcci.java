@@ -12,10 +12,10 @@ import java.util.Stack;
 
 //Java：化栈为队
 //public class P面试题 03.04ImplementQueueUsingStacksLcci{
-public class P面试题0304ImplementQueueUsingStacksLcci{
+class P面试题0304ImplementQueueUsingStacksLcci{
     public static void main(String[] args) {
         MyQueue solution = new P面试题0304ImplementQueueUsingStacksLcci().new MyQueue();
-        // TO TEST  
+        // TO TEST
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
