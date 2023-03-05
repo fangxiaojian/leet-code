@@ -19,6 +19,10 @@
 
 
 package leetcode.editor.cn;
+
+import java.util.HashMap;
+import java.util.Map;
+
 //Java：多数元素
 public class P169MajorityElement{    
     public static void main(String[] args) {      
@@ -29,8 +33,34 @@ public class P169MajorityElement{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
-class Solution {
-    public int majorityElement(int[] nums) {
+    class Solution {
+        public int majorityElement(int[] nums) {
+            Map<Integer, Integer> map = new HashMap<>();
+            int count = 0;
+            for (int num : nums) {
+                if (map.containsKey(num)) {
+                    count = map.get(num) + 1;
+                } else {
+                    count = 1;
+                }
+                if (count * 2 >= nums.length) {
+                    return num;
+                } else {
+                    map.put(num, count);
+                }
+            }
+            return 0;
+        }
+        /**
+         * 思路：用map存放数字的个数
+         * 解答成功:
+         * 	执行耗时:13 ms,击败了21.68% 的Java用户
+         * 	内存消耗:46.7 MB,击败了12.16% 的Java用户
+         */
+
+
+    /** ===============================方法1=================================**/
+    /*public int majorityElement(int[] nums) {
         int[][] index = new int[nums.length/2+1][2];
         int target = 0;
         for (int num : nums) {
@@ -47,7 +77,7 @@ class Solution {
             }
         }
         return 0;
-    }
+    }*/
 }
 //leetcode submit region end(Prohibit modification and deletion)
 /**
