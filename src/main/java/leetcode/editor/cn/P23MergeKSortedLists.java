@@ -82,14 +82,22 @@ class Solution {
                     h.next = temp;
                     h = temp;
                 }
-                if (listNode.next != null) {
-                    if (map.containsKey(listNode.next.val)) {
-                        List<ListNode> xx = map.get(listNode.next.val);
-                        xx.add(listNode.next);
-                    } else {
-                        List<ListNode> xx = new ArrayList<>();
-                        xx.add(listNode.next);
-                        map.put(listNode.next.val, xx);
+                while (listNode.next != null) {
+                    listNode = listNode.next;
+                    if (listNode.val == i) {
+                        temp = new ListNode(listNode.val);
+                        h.next = temp;
+                        h = temp;
+                    }else {
+                        if (map.containsKey(listNode.val)) {
+                            List<ListNode> xx = map.get(listNode.val);
+                            xx.add(listNode);
+                        } else {
+                            List<ListNode> xx = new ArrayList<>();
+                            xx.add(listNode);
+                            map.put(listNode.val, xx);
+                        }
+                        break;
                     }
                 }
             }
@@ -99,5 +107,10 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+/**
+ * 思路：TreeMap 放置将链表的第一个元素排序放置，每次获取第一个链表，若这个还有后续节点，将这个节点放置在TreeMap中。
+ * 解答成功:
+ * 	执行耗时:5 ms,击败了38.92% 的Java用户
+ * 	内存消耗:41.9 MB,击败了99.44% 的Java用户
+ */
 }
