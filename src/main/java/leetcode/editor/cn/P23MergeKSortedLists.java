@@ -15,9 +15,10 @@
 
 package leetcode.editor.cn;
 
+import javafx.collections.transformation.SortedList;
 import leetcode.editor.cn.util.ListNode;
 
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 //Java：合并K个排序链表
@@ -25,16 +26,16 @@ public class P23MergeKSortedLists{
     public static void main(String[] args) {      
         Solution solution = new P23MergeKSortedLists().new Solution();       
         // TO TEST
-//        int[] value1 = {1, 4, 5};
-//        int[] value2 = {1, 3, 4};
-//        int[] value3 = {2, 6};
-//        ListNode[] listNodes = new ListNode[3];
-//        listNodes[0] = new ListNode(value1);
-//        listNodes[1] = new ListNode(value2);
-//        listNodes[2] = new ListNode(value3);
-        ListNode[] listNodes = new ListNode[2];
-        listNodes[0] = null;
-        listNodes[1] = new ListNode(1);
+        int[] value1 = {1, 4, 5};
+        int[] value2 = {1, 3, 4};
+        int[] value3 = {2, 6};
+        ListNode[] listNodes = new ListNode[3];
+        listNodes[0] = new ListNode(value1);
+        listNodes[1] = new ListNode(value2);
+        listNodes[2] = new ListNode(value3);
+//        ListNode[] listNodes = new ListNode[2];
+//        listNodes[0] = null;
+//        listNodes[1] = new ListNode(1);
         solution.mergeKLists(listNodes);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -48,56 +49,52 @@ public class P23MergeKSortedLists{
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        if (lists.length == 0) {
+        ListNode head = null, h = null, temp = null;
+        if (lists == null) {
             return null;
         }
-        int count = 0;
-        ListNode head = lists[0];
-        int i = 0;
-        for (; i < lists.length; i++) {
-            if (lists[i] != null) {
-                head = lists[i];
-                break;
-            }
-        }
-        Queue<ListNode> queue = new LinkedBlockingQueue<>();
-        for (i++; i < lists.length; i++) {
-            if (lists[i] != null) {
-                if (head.val > lists[i].val) {
-                    queue.offer(head);
-                    count++;
-                    head = lists[i];
+        Map<Integer, List<ListNode>> map = new TreeMap<>();
+
+        for (ListNode listNode : lists) {
+            if (listNode != null) {
+                if (map.containsKey(listNode.val)) {
+                    List<ListNode> listNodes = map.get(listNode.val);
+                    listNodes.add(listNode);
                 } else {
-                    queue.offer(lists[i]);
-                    count++;
+                    List<ListNode> listNodes = new ArrayList<>();
+                    listNodes.add(listNode);
+                    map.put(listNode.val, listNodes);
                 }
             }
         }
-        if (head == null) {
-            return head;
-        }
-        ListNode p1 = head;
-        ListNode temp = head.next;
-        ListNode p2;
-        while (!queue.isEmpty()) {
-            if (temp == null) {
-                p1.next = queue.poll();
-                temp = p1.next;
-                count--;
-            }
-            for (int j = 0; j < count; j++) {
-                p2 = queue.poll();
-                if (temp.val <= p2.val) {
-                    queue.offer(p2);
+
+        while (map.size() > 0) {
+            Iterator<Integer> iter = map.keySet().iterator();
+            Integer i = iter.next();
+            List<ListNode> listNodes = map.get(i);
+            map.remove(i);
+            for (ListNode listNode : listNodes) {
+                if (head == null) {
+                    head = new ListNode(listNode.val);
+                    h = head;
                 } else {
-                    p1.next = p2;
-                    queue.offer(temp);
-                    temp = p1.next;
+                    temp = new ListNode(listNode.val);
+                    h.next = temp;
+                    h = temp;
+                }
+                if (listNode.next != null) {
+                    if (map.containsKey(listNode.next.val)) {
+                        List<ListNode> xx = map.get(listNode.next.val);
+                        xx.add(listNode.next);
+                    } else {
+                        List<ListNode> xx = new ArrayList<>();
+                        xx.add(listNode.next);
+                        map.put(listNode.next.val, xx);
+                    }
                 }
             }
-            p1 = p1.next;
-            temp = p1.next;
         }
+
         return head;
     }
 }
