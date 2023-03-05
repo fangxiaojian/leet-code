@@ -17,7 +17,8 @@ LeetCode
 - Code Template:
   - ```java
     package leetcode.editor.cn;
-
+    
+    ${question.content}
     public class P$!{question.frontendQuestionId}$!velocityTool.camelCaseName(${question.titleSlug}){
     
         public static void main(String[] args) {
